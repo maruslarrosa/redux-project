@@ -4,8 +4,26 @@ import {
   ADD_PRODUCT_ERROR,
 } from "../types";
 
-export function createNewProductAction() {
-  return () => {
-    console.log("from action");
+export function createNewProductAction(product) {
+  return (dispatch) => {
+    dispatch(addProduct());
+
+    try {
+      dispatch(addProductSuccess());
+    } catch (error) {
+      dispatch(addProductError());
+    }
   };
 }
+
+const addProduct = () => ({
+  type: ADD_NEW_PRODUCT,
+});
+
+const addProductSuccess = () => ({
+  type: ADD_PRODUCT_SUCCESS,
+});
+
+const addProductError = () => ({
+  type: ADD_PRODUCT_ERROR,
+});
